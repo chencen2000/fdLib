@@ -24,6 +24,8 @@ testlib是一个测试exe项目，目的是演示如何加载fdLib.dll和获得A
 如下的例子，
 
 ```
+    typedef int (*func1)(DWORD);
+
     HINSTANCE hDLL = LoadLibrary(L"fdLib.dll");
     if (hDLL != NULL)
     {
