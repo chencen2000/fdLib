@@ -39,6 +39,11 @@ testlib是一个测试exe项目，目的是演示如何加载fdLib.dll和获得A
 演示了加载fdLib.dll和获得名字为func1的API，并且进行调用，获得返回值。
 
 
+## 开发环境
+
+[Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+
+
 ## 集成
 
 在BZ的代码内，可以加载fdLib.dll，等到需要保存图片的时候，可以调用API接口，将图片传递给DLL。DLL可以将图片保存在硬盘上。
