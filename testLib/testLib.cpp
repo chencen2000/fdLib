@@ -5,7 +5,7 @@
 
 typedef int (*func1)(DWORD);
 
-int main()
+int main_test()
 {
     HINSTANCE hDLL = LoadLibrary(L"fdLib.dll");
     if (hDLL != NULL)
@@ -15,8 +15,26 @@ int main()
             std::cout << "Load DLL successfully, and func1 return " << p(1) << std::endl;
         }
     }
-
+    return 0;
     //std::cout << "Hello World!\n";
+}
+
+int main() 
+{
+    HANDLE hFile = CreateFile(L"shared_memory", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+    if (hFile != INVALID_HANDLE_VALUE) {
+        HANDLE h = CreateFileMapping(hFile, NULL, PAGE_READWRITE, 0, MAX_PATH, L"shared_memory");
+        if (h != NULL) {
+            LPVOID p = MapViewOfFile(h, FILE_MAP_ALL_ACCESS, 0, 0, MAX_PATH);
+            memcpy(p, "Hello, World", 100);
+            std::cout << "Press any key to terminate...";
+            std::cin.get();
+            UnmapViewOfFile(p);
+            CloseHandle(h);
+        }
+        CloseHandle(hFile);
+    }
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
